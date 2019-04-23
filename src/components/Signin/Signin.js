@@ -18,7 +18,7 @@ class Signin extends Component {
   }
 
   onSubmitSignIn = () => {
-    fetch(process.env.SERVER_URL + "/signin", {
+    fetch(`${process.env.SERVER_URL}/signin`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -33,6 +33,7 @@ class Signin extends Component {
           this.props.onRouteChange("home");
         }
       })
+      .catch(err => console.log("could not sign in"));
   }
 
   render() {

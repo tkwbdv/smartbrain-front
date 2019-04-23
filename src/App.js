@@ -11,7 +11,8 @@ import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import './App.css';
 
-
+console.log("server: ", process.env.SERVER_URL);
+console.log("env: ", process.env);
 // data  ==================================
 
 const initialState = {
@@ -72,7 +73,7 @@ class App extends Component {
   }
 
   onPictureSubmit = () => {
-    fetch(process.env.SERVER_URL + "/imageurl", {
+    fetch(`${process.env.SERVER_URL}/imageurl`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: this.state.input })
@@ -80,7 +81,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response.outputs[0].data.regions.length) {
-          fetch(process.env.SERVER_URL + "/image", {
+          fetch(`${process.env.SERVER_URL}/image`, {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: this.state.user.id })

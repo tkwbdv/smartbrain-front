@@ -26,7 +26,7 @@ class Register extends React.Component {
   onSubmitRegister = () => {
     const { registerName, registerEmail, registerPassword } = this.state;
     if (registerName && validator.isEmail(registerEmail) && registerPassword) {
-      fetch(process.env.SERVER_URL + "/register", {
+      fetch(`${process.env.SERVER_URL}/register`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -41,7 +41,8 @@ class Register extends React.Component {
             this.props.loadUser(user);
             this.props.onRouteChange("home");
           }
-        });
+        })
+        .catch(err => console.log("could not register"));
     }
   }
   render() {
