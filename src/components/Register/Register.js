@@ -26,7 +26,7 @@ class Register extends React.Component {
   onSubmitRegister = () => {
     const { registerName, registerEmail, registerPassword } = this.state;
     if (registerName && validator.isEmail(registerEmail) && registerPassword) {
-      fetch("https://young-lake-92533.herokuapp.com/register", {
+      fetch(process.env.SERVER_URL + "/register", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

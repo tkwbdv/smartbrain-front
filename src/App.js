@@ -72,7 +72,7 @@ class App extends Component {
   }
 
   onPictureSubmit = () => {
-    fetch("https://young-lake-92533.herokuapp.com/imageurl", {
+    fetch(process.env.SERVER_URL + "/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: this.state.input })
@@ -80,7 +80,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response.outputs[0].data.regions.length) {
-          fetch("https://young-lake-92533.herokuapp.com/image", {
+          fetch(process.env.SERVER_URL + "/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: this.state.user.id })
